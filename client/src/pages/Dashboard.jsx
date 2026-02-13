@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 const Dashboard = () => {
   const [registrations, setRegistrations] = useState([]);
@@ -12,7 +13,7 @@ const Dashboard = () => {
     const fetchRegistrations = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await fetch('/api/registrations', {
+        const res = await fetch(`${API_URL}/api/registrations`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         const data = await res.json();

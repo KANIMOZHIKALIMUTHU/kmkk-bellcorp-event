@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import EventCard from '../components/EventCard';
 import { useAuth } from '../context/AuthContext';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 const Events = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,7 +21,7 @@ const Events = () => {
     if (category) params.append('category', category);
     if (location) params.append('location', location);
 
-    fetch(`/api/events?${params}`)
+    fetch(`${API_URL}/api/events?${params}`)
       .then(res => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();

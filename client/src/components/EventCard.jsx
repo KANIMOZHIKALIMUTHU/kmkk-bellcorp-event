@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 const EventCard = ({ event }) => {
   const [registering, setRegistering] = useState(false);
@@ -17,7 +18,7 @@ const EventCard = ({ event }) => {
     setRegistering(true);
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('/api/registrations', {
+      const res = await fetch(`${API_URL}/api/registrations`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
